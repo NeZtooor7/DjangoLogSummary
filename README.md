@@ -126,17 +126,7 @@ By default, the project runs with a **mock LLM** (`LLM_MOCK=true`) so you can te
 
 ---
 
-## 9) Troubleshooting
-
-- **POST redirected / data lost** → Always include the trailing slash (`/api/jobs/`), or set `APPEND_SLASH=False` in settings.
-- **Timezone error (`Europe/Germany`)** → The project uses `Europe/Berlin` (valid IANA zone). Ensure your `TIME_ZONE` is correct.
-- **Cannot connect to DB** → Confirm your `.env` matches the compose mapping (`DB_HOST=127.0.0.1`, `DB_PORT=5433`) and that the container is running.
-- **`relation "app_logjob" does not exist`** → Run migrations (`makemigrations` + `migrate`) against the correct database.
-- **Windows & `%` in passwords** → In CMD, `%` is special. Prefer PowerShell or escape `%`, or use a simpler password to test.
-
----
-
-## 10) Project notes
+## 9) Project notes
 
 - Settings module is `app.settings` (configured in `manage.py`).  
 - URLs for the API live in `app/urls.py` (see `/api/jobs/` and `/api/jobs/<int:pk>/`).  
@@ -144,7 +134,7 @@ By default, the project runs with a **mock LLM** (`LLM_MOCK=true`) so you can te
 
 ---
 
-## 11) Clean up
+## 10) Clean up
 
 ```bash
 docker compose down
