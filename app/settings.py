@@ -11,22 +11,25 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mh=rc2g$qx6u97s%xo7l!lc@h$h-4k@zjf0sr-4$*50g+45nv4'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", 'django-insecure-mh=rc2g$qx6u97s%xo7l!lc@h$h-4k@zjf0sr-4$*50g+45nv4')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
 
+APPEND_SLASH = False
 
 # Application definition
 
@@ -76,8 +79,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE':   os.getenv("DB_ENGINE", 'django.db.backends.postgresql'),
+        'NAME':     os.getenv("DB_NAME", 'db_name'),
+        'USER':     os.getenv("DB_USER", 'db_user'),
+        'PASSWORD': os.getenv("DB_PASSWORD", 'db_user_password'),
+        'HOST':     os.getenv("DB_HOST", 'localhost'),
+        'PORT':     os.getenv("DB_PORT", '5432'),
     }
 }
 
@@ -104,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 

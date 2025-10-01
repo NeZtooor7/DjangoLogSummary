@@ -1,2 +1,4 @@
 .idea
 .idea/*
+app/migrations
+app/migrations/*

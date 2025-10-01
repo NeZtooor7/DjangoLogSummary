@@ -1,3 +1,4 @@
+from os import getenv
 from rest_framework import status, views, generics
 from rest_framework.response import Response
 from django.db import transaction
@@ -6,7 +7,7 @@ from .serializers import LogJobSerializer, LogUploadSerializer
 from .services.parser import parse_log_lines
 from .services.llm import build_prompt, call_llm
 
-MAX_BYTES = 1_000_000
+MAX_BYTES = int(getenv("MAX_LOG_FILE_SIZE_BYTES", "1000000"))
 
 class JobCreateView(views.APIView):
     @staticmethod
